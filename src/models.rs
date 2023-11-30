@@ -11,7 +11,7 @@ pub struct Rustacean {
 }
 
 #[derive(Insertable)]
-#[diesel(table_name = "rustaceans")]
+#[diesel(table_name=rustaceans)]
 pub struct NewRustacean {
     pub name: String,
     pub email: String,
@@ -29,8 +29,8 @@ pub struct Crate {
 }
 
 #[derive(Insertable)]
-#[diesel(table_name = "crates")]
-pub struct NewCrete {
+#[diesel(table_name=crates)]
+pub struct NewCrate {
     pub rustacean_id: i32,
     pub code: String,
     pub name: String,
