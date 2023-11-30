@@ -1,0 +1,23 @@
+version: '3.3'
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=app_db
+      - ALLOW_IP_RANGE=0.0.0.0/0
+    volumes: 
+      - ./pg_hba.conf:/var/lib/foo/pg_hba.conf
+    command: ["postgres", "-c", "hba_file=/var/lib/foo/pg_hba.conf"]
+  redis:
+    image: redis:latest
+  app:
+    build: .
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres/app_db
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/app/
